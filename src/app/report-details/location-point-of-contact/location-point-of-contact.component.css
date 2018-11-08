@@ -1,0 +1,98 @@
+.Tab {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    background-color: #5dbfd4;
+    border: solid 1px #5dbfd4;
+    color: #ffffff;
+}  
+ 
+input:focus,
+a:focus {
+   outline:none;
+}
+.hdr-user{
+    margin-top:20px;
+    margin-left : auto;
+    margin-right: 20px;
+    width : 300px; 
+    height:40px; 
+}
+
+table{
+    margin: 0 auto
+ }
+
+.mat-table {
+    overflow: auto;
+    max-height: 700px;
+    background-color: whitesmoke !important;
+  }
+
+mat-paginator{
+    background-color: whitesmoke !important;
+    font-family: 'Source Sans Pro';
+    font-size: 14px;
+    color:#253746;    
+}
+
+mat-header-row{
+    background-color: #394a57 !important;   
+}
+
+mat-header-cell{
+    color: white !important;
+    font-family: 'Source Sans Pro';
+    font-size: 18px;
+    font-weight: 800;
+}
+
+mat-column-action {
+    flex: 0 0 200px;
+}
+
+.mat-cell{
+    color:#253746;
+}
+
+mat-row:hover {
+    background-color:#e9e9e9;
+}
+
+:host ::ng-deep .mat-input-underline.mat-form-field-underline{
+    width: 0;
+}
+
+:host ::ng-deep .mat-form-field-infix{
+    width:500px;
+}
+
+:host ::ng-deep .mat-input-placeholder{
+    font-family: Roboto;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    padding-left : 50px;
+    font-size : 20px;
+    text-align:left;
+}
+
+.search-tab{
+    border: solid 3px #5dbfd4;
+    border-radius: 6.5px;
+    width : 600px; 
+    height:40px;   
+}
+
+.Username {
+    font-family: Roboto;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+}
+
+.mat-input-element{
+    padding-left: 50px;
+}

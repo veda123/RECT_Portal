@@ -1,0 +1,48 @@
+<div class="container-fluid">
+<div class="row">
+  <searchTab [tableData] = "billOfMaterials" (searchValue)="displayFilter($event)"></searchTab>
+  <addButton [nextPageLink]= "nextPageLinkValue">
+    <ng-container>Add New Bill of Materials</ng-container>
+  </addButton>
+</div>
+<div class="table-container" #TABLE> 
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="equipment.equipmentname" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="equipment.equipmentname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test Set Name </mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.equipment.equipmentname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lrupartnumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>LRU PartNumber</mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.lrupartnumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="equipmentPart.equipmentPartNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Materials PartNumber</mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.equipmentPart.equipmentPartNumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="manufacture">
+      <mat-header-cell *matHeaderCellDef>Manufacture </mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.manufacture}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="equipmentPart.description">
+      <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.equipmentPart.description}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef>Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials"> {{billOfMaterials.quantity}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let billOfMaterials">
+        <a class="btn Action-Tab" [routerLink]="['/admin/bill-of-materials/edit/',billOfMaterials.billID]" 
+          [queryParams]="{equipId:billOfMaterials.equipment.equipmentID, equipPartId:billOfMaterials.equipmentPart.equipmentID}">Edit</a>&nbsp;&nbsp; 
+        <a class="btn Action-Tab" (click)="deleteMaterial(billOfMaterials.billID)">Delete</a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let billOfMaterials; columns: displayedColumns;"></mat-row>  
+    </mat-table>   
+    <mat-paginator [pageSizeOptions]="[10, 20, 50,100]"></mat-paginator>
+</div>
+<button type ="button" mat-raised-button class="exportButton" color="primary" (click)="exportData()">Export as Excel</button>
+</div>

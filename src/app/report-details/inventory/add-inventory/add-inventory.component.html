@@ -1,0 +1,103 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6 " [formGroup]="inventoryForm" (ngSubmit)="processInventory(inventoryForm.value)" novalidate>
+        <div *ngIf="inventoryForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="equipmentname">Equipment Name</label>
+        <select formControlName="equipmentname" id="equipmentname" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': equipmentname.touched && equipmentname.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select Equipment Name</option>
+          <option *ngFor="let equipment of equipment | sortPipe :'equipmentname'" [value]="equipment.equipmentID">{{equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="equipmentname.touched && equipmentname.invalid" class="display-error">
+          <div *ngIf="equipmentname.errors.required">Equipment Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="equipmentPartNumber">Part Number</label>
+        <select formControlName="equipmentPartNumber" id="equipmentPartNumber" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': equipmentPartNumber.touched && equipmentPartNumber.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Part Number</option>
+          <option *ngFor="let equipment of equipment" [value]="equipment.equipmentID">{{equipment.equipmentPartNumber}}</option>
+        </select>
+        <div *ngIf="equipmentPartNumber.touched && equipmentPartNumber.invalid" class="display-error">
+          <div *ngIf="equipmentPartNumber.errors.required"> Part Number is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="serialNumber">Serial Number</label>
+        <input formControlName="serialNumber" id="serialNumber" type="text" class="form-control" [(ngModel)] = "inventory.serialNumber" placeholder="Serial Number"
+            [ngClass]="{'has-error': serialNumber.touched && serialNumber.invalid}">
+        <div *ngIf="serialNumber.touched && serialNumber.invalid" class="display-error">
+          <div *ngIf="serialNumber.errors.required">Serial Number is required</div>
+          <div *ngIf="serialNumber.errors.minlength">Serial Number should be more than {{minlengthName}} characters</div>
+          <div *ngIf="serialNumber.errors.maxlength">Serial Number should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="rev">Rev</label>
+        <input formControlName="rev" id="rev" type="text" class="form-control" [(ngModel)] = "inventory.rev" placeholder="Rev"
+            [ngClass]="{'has-error': rev.touched && rev.invalid}">
+        <div *ngIf="rev.touched && rev.invalid" class="display-error">
+          <div *ngIf="rev.errors.required">Rev is required</div>
+          <div *ngIf="rev.errors.maxlength">Rev should be less than {{maxLimit}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="manufactureDate">Manufacture Date </label>
+        <app-datepicker [value] ="defaultDate" (notify)="onNotify($event)"></app-datepicker>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="status">Status</label>
+        <input formControlName="status" id="status" type="text" class="form-control" [(ngModel)] = "inventory.status"  placeholder="Status"
+            [ngClass]="{'has-error': status.touched && status.invalid}">
+        <div *ngIf="status.touched && status.invalid" class="display-error">
+          <div *ngIf="status.errors.required">Status is required</div>
+          <div *ngIf="status.errors.pattern">Invalid Status</div>
+          <div *ngIf="status.errors.minlength">Status should be more than {{minlengthName}} characters</div>
+          <div *ngIf="status.errors.maxlength">Status Number should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="owner">Owner</label>
+        <input formControlName="owner" id="owner" type="text" class="form-control" [(ngModel)] = "inventory.owner" placeholder="Owner"
+            [ngClass]="{'has-error': owner.touched && owner.invalid}">
+        <div *ngIf="owner.touched && owner.invalid" class="display-error">
+          <div *ngIf="owner.errors.required">Owner is required</div>
+          <div *ngIf="owner.errors.pattern"> Invalid owner</div>
+          <div *ngIf="owner.errors.minlength">Owner should be more than {{minlengthName}} characters</div>
+          <div *ngIf="owner.errors.maxlength">Owner should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="ownership">Ownership</label>
+        <input formControlName="ownership" id="ownership" type="text" class="form-control" [(ngModel)] = "inventory.ownership" placeholder="Ownership"
+            [ngClass]="{'has-error': ownership.touched && ownership.invalid}">
+        <div *ngIf="ownership.touched && ownership.invalid" class="display-error">
+          <div *ngIf="ownership.errors.required">Ownership is required</div>
+          <div *ngIf="ownership.errors.pattern">Ownership is invalid</div>
+          <div *ngIf="ownership.errors.minlength">Ownership should be more than {{minlengthName}} characters</div>
+          <div *ngIf="ownership.errors.maxlength">Ownership should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="locationName">Location Name</label>
+        <select formControlName="locationName" id="locationName" class="form-control" (ngModelChange)="selectedLocation($event)" [(ngModel)]="locationSel" [disableControl]="disable"
+            [ngClass]="{'has-error': locationName.touched && locationName.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Location Name</option>
+          <option *ngFor="let location of location" [value]="location.locationID">{{location.locationName}}</option>
+        </select>
+        <div *ngIf="locationName.touched && locationName.invalid" class="display-error">
+          <div *ngIf="locationName.errors.required">Location Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!inventoryForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

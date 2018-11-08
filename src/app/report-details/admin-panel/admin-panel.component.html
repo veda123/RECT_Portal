@@ -1,0 +1,41 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row h-25 justify-content-center align-items-center"> 
+        <div class="Focused-Object">{{title}}</div>
+    </div>
+
+    <div class="row h-25 justify-content-center align-items-center Focused-nav">
+    <nav class="navbar navbar-expand col-sm-8">
+        <ul class="nav navbar-nav justify-content-center">
+          <li class="nav-item Tab-admin First-Tab dropdown" routerLinkActive="active-link">
+            <a class="nav-link Tab dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Catalog
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/equipment']">Equipment</a>
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/Repair-kits']">Repair Kits</a>
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/tps']">TPS</a>
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/bill-of-materials']">Bill of Materials</a>
+            </div>
+          </li>
+          <li class="nav-item Tab-admin">
+            <a class="nav-link Tab" routerLinkActive="active-link" [routerLink]="['/admin/inventory']">Inventory</a>
+          </li>
+          <li class="nav-item Tab-admin">
+            <a class="nav-link Tab" routerLinkActive="active-link" [routerLink]="['/admin/contract']">Contracts</a>
+          </li>
+          <li class="nav-item Tab-admin dropdown Last-Tab" routerLinkActive="active-link">
+            <a class="nav-link Tab dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Location
+            </a>
+            <div class="dropdown-menu menu-location" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/location']">Location Details</a>
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/locationPOC']">Point of Contact</a>
+              <a class="dropdown-item" routerLinkActive="active-link" [routerLink]="['/admin/repairCapability']">Repair Capability</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+  </div>
+</div>
+<router-outlet></router-outlet>

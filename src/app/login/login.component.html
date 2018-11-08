@@ -1,0 +1,34 @@
+<div class= "overlay">
+    <div class="container h-100">
+        <div class="row h-25 justify-content-center align-items-center"> 
+            <div class="title backColor">{{title}}</div>
+        </div>
+        
+        <div class="row h-50 justify-content-center align-items-center"> 
+                <form class="col-sm-6" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" novalidate>
+                        <div *ngIf="loginForm.errors || invalidLogin" class="alert alert-danger Input-Field">Invalid Username or Password </div>            
+                    <div class="form-group" [ngClass]="{'has-error': usernameOrEmail.touched && usernameOrEmail.invalid}">
+                        <div class="input-wrapper">
+                            <input  formControlName="usernameOrEmail" id="usernameOrEmail" type="text"  class="form-control Username Input-Field" placeholder="Username"
+                                    [ngClass]="{'has-error': usernameOrEmail.touched && usernameOrEmail.invalid }">
+                            <label for="usernameOrEmail" class="fa fa-user-circle fa-lg input-icon"></label>
+                        </div>
+                        <div *ngIf="usernameOrEmail.touched && usernameOrEmail.invalid" class="display-error">Username is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': password.touched && password.invalid}">
+                        <div class="input-wrapper">
+                            <input  formControlName="password" id="password" type="password"  class="form-control Username Input-Field" placeholder="Password"
+                                    [ngClass]="{'has-error': password.touched && password.invalid }">
+                            <label for="password" class="fa fa-lock fa-lg input-icon"></label>
+                        </div>
+                        <div *ngIf="password.touched && password.invalid" class="display-error">Password is required</div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info btn-md btn-block Input-Field" type="submit" [disabled]="!loginForm.valid">Login</button>
+                    </div>  
+                    <img [src]='imagePath' class="logo"/>
+                </form>
+                
+            </div>
+        </div>
+    

@@ -1,0 +1,22 @@
+<form >
+    <div class="form-group">
+      <div class="input-group">
+        <!-- <input class="form-control" [placeholder] ="value" type="text" [(ngModel)] = "value"
+           name="dp" [(ngModel)]="model" #name="ngModel" ngbDatepicker #d="ngbDatepicker" (ngModelChange)="onDateChange($event)" required readonly = "readonly" 
+           [minDate]="minDate"> -->
+        <input class="form-control" [placeholder] ="value" type="text" [(ngModel)] = "value" name="dp" [(ngModel)]="model" #name="ngModel" 
+            ngbDatepicker #d="ngbDatepicker" (ngModelChange)="onDateChange($event)" required readonly = "readonly">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <img [src]='imagePath' class="calendar"/>
+          </button>
+        </div>
+      </div>
+        <div *ngIf ="name.invalid && name.touched" class="display-error">
+          <div *ngIf="name.errors.required">
+            Please Choose the Date
+          </div>
+      </div>
+    </div>
+  </form>
+  

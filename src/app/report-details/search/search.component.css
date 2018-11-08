@@ -1,0 +1,9 @@
+.search-tab{
+    border: solid 3px #5dbfd4;
+    border-radius: 6.5px;
+    width : 600px; 
+    height:40px;   
+ }
+ .mat-input-element{
+    padding-left: 50px;
+}

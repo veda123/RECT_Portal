@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center"> 
+        <form class="col-lg-6 " [formGroup]="locationForm" (ngSubmit)="processLocation(locationForm.value)" novalidate>
+            <div *ngIf="locationForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>  
+            <div class="form-group required">
+                <label class="control-label" for="name">Location Name</label>
+                <input  formControlName="locationName" id="name" type="text" [(ngModel)] ="location.locationName" class="form-control" placeholder="Location Name" 
+                    [ngClass]="{'has-error': locationName.touched && locationName.invalid }">
+                <div *ngIf="locationName.touched && locationName.invalid" class="display-error">
+                    <div *ngIf="locationName.errors.required">Location Name is required</div>
+                    <div *ngIf="locationName.errors.pattern">Invalid Location Name</div>
+                    <div *ngIf="locationName.errors.minlength">Location Name should be more than {{minlengthName}} characters</div>
+                    <div *ngIf="locationName.errors.maxlength">Location Name should be less than {{maxlengthName}} characters</div>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="control-label" for="address">Address</label>
+                <textarea formControlName="address" class="form-control" id="address" rows="4"  [(ngModel)] ="location.address" placeholder="Location Address" 
+                    [ngClass]="{'has-error': address.touched && address.invalid }"></textarea>
+                <div *ngIf="address.touched && address.invalid" class="display-error">
+                    <div *ngIf="address.errors.required"> Address is required</div>
+                    <div *ngIf="address.errors.minlength">Address should be more than {{minlengthName}} characters</div>
+                    <div *ngIf="address.errors.maxlength">Address should be less than {{maxAddressValue}} characters</div>  
+                </div>
+            </div>
+            <div class="form-group required" >
+                <label class="control-label" for="countryName">Country</label>
+                <select formControlName="countryName" id="countryName" class="form-control" (ngModelChange)="selectedCountry($event)" [(ngModel)]="countrySel" [disableControl]="disable"
+                        [ngClass]="{'has-error': countryName.touched && countryName.invalid }">
+                    <option [ngValue]="undefined" disabled hidden>Select Country</option>
+                    <option *ngFor="let country of countries" [value]="country.id">{{country.countryName}}</option>
+                </select>
+                <div *ngIf="countryName.touched && countryName.invalid" class="display-error">Please select country</div> 
+            </div>
+            <div class="form-group required">
+                <label class="control-label" for="city">City</label>
+                <input  formControlName="city" id="city" type="text" [(ngModel)] ="location.city" class="form-control" placeholder="City" 
+                    [ngClass]="{'has-error': city.touched && city.invalid }">
+                <div *ngIf="city.touched && city.invalid" class="display-error">
+                    <div *ngIf="city.errors.required">City Name is required</div>
+                    <div *ngIf="city.errors.pattern">Invalid City Name </div>
+                    <div *ngIf="city.errors.minlength">City Name should be more than {{minlengthName}} characters</div>
+                    <div *ngIf="city.errors.maxlength">City Name should be less than {{maxlengthName}} characters</div>    
+                </div>
+            </div>
+            <div class="form-group required" >
+                <label class="control-label" for="zipcode">ZipCode</label>
+                <input formControlName="zipcode" id="zipcode" type="text" class="form-control" [(ngModel)] ="location.zipcode" placeholder="Zipcode"
+                    [ngClass]="{'has-error': zipcode.touched && zipcode.invalid}">
+                <div *ngIf="zipcode.touched && zipcode.invalid" class="display-error">
+                    <div *ngIf="zipcode.errors.required">ZipCode is required</div>
+                    <div *ngIf="zipcode.errors.minlength">Zipcode should be more than {{minZipcodeValue}} characters</div> 
+                    <div *ngIf="zipcode.errors.maxlength">Zipcode should be less than {{maxZipcodeValue}} characters</div>   
+                </div>
+            </div>
+            <div class="form-group" >
+                <label for="phone">Phone</label>
+                <input formControlName="phone" id="phone" type="text" class="form-control" [(ngModel)] ="location.phone" placeholder="Phone"
+                [ngClass]="{'has-error': phone.touched && phone.invalid }">
+                <div *ngIf="phone.touched && phone.invalid" class="display-error">
+                    <div *ngIf="phone.errors.pattern">Phone number is invalid</div>
+                    <div *ngIf="phone.errors.maxlength">Phone number exceeded the maximum length </div>
+                </div>
+            </div>
+            <div class="form-group required" >
+                <label class="control-label" for="timezone">TimeZone</label>
+                <input formControlName="timezone" id="timezone" type="text" class="form-control" [(ngModel)] ="location.timezone" placeholder="TimeZone"
+                    [ngClass]="{'has-error': timezone.touched && timezone.invalid}">
+                <div *ngIf="timezone.touched && timezone.invalid" class="display-error">
+                    <div *ngIf="timezone.errors.required">TimeZone is required</div>
+                    <div *ngIf="timezone.errors.pattern">Invalid TimeZone</div> 
+                    <div *ngIf="timezone.errors.min">Allowed TimeZone value is between {{minTimeZoneValue}} to  {{maxTimeZoneValue}}</div>
+                    <div *ngIf="timezone.errors.max">Timezone should be less than {{maxTimeZoneValue}}</div>            
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <button  type="button" class="btn btn-danger btn-md backButton" Goback >BACK</button>      
+                    <button  type="submit" class="btn btn-info btn-md submitButton"  [disabled]="!locationForm.valid">SAVE</button>
+                    <button  type="button" class="btn btn-md resetButton" (click)="reset()">RESET</button>
+                 </div>
+            </div>
+        </form>
+    </div>
+</div>

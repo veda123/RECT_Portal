@@ -1,0 +1,8 @@
+.modal-dialog{
+    margin-top : 300px;
+}
+
+.modal-title, .modal-body, .modal-footer{
+  margin: 0 auto;
+  text-align: center !important;
+}

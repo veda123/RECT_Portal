@@ -1,0 +1,117 @@
+
+.container-fluid {
+    padding-top: 20px;
+    background-color: #394a57;
+    height:auto;
+}
+
+.Focused-Object {
+    text-align: center;
+    font-family: "Roboto","Helvetica Neue","sans-serif"; 
+    font-size: 30px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #ffffff;
+  }
+
+  .Focused-nav{
+    padding-top:25px;
+    padding-bottom:30px;
+  }
+
+  @media (min-width: 992px) {  
+    .Tab-admin {
+       width: 125px;
+    }
+ }
+ @media (min-width: 1200px) {  
+    .Tab-admin {
+       width: 150px;
+    }
+ }
+ 
+
+.Tab-admin {
+    height: 35px;
+    border: solid 1px #5dbfd4;
+    color: #5dbfd4;
+}    
+
+.Tab {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    text-align:center;
+    color: #5dbfd4;
+}     
+
+li{
+    cursor:pointer;
+}
+
+.active-link{
+    color: #ffffff !important;
+    background-color: #5dbfd4;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+}
+.Last-Tab
+{
+  border-top-right-radius: 4.5px;
+  border-bottom-right-radius: 4.5px;
+}
+
+.First-Tab
+{
+  border-top-left-radius: 4.5px;
+  border-bottom-left-radius: 4.5px;
+}
+
+.navbar-nav
+{
+position: absolute;
+width: 100%;
+left: 0;
+text-align: center;
+margin:0 auto;
+}
+
+.dropdown-menu{
+    height: 132px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.menu-location
+{
+    height: 90px;
+}
+ 
+.dropdown-item{
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #5dbfd4;
+}
+
+a:active {
+    background-color:whitesmoke;
+}
+
+  

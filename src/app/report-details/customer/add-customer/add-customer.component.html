@@ -1,0 +1,108 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6 " [formGroup]="customerForm" (ngSubmit)="processCustomer(customerForm.value)" novalidate>
+        <div *ngIf="customerForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div> 
+        <div *ngIf ="invalidFile" class="alert alert-danger">Invalid file </div> 
+        <div *ngIf ="invalidDate" class="alert alert-danger">Start Date cannot be greater than End Date </div> 
+      <div class="form-group required">
+        <label class="control-label field-heading" for="customerName">Customer Name</label>
+        <input formControlName="customerName" id="customerName" type="text" class="form-control" [(ngModel)] = "customer.customerName" placeholder="Customer Name"
+            [ngClass]="{'has-error': customerName.touched && customerName.invalid}">
+        <div *ngIf="customerName.touched && customerName.invalid" class="display-error">
+          <div *ngIf="customerName.errors.required"> Customer Name is required</div>
+          <div *ngIf="customerName.errors.pattern" > Invalid Customer Name</div>
+          <div *ngIf="customerName.errors.minlength">Customer Name should be more than {{minlengthName}} characters</div>
+          <div *ngIf="customerName.errors.maxlength">Customer Name should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="equipmentname">Equipment Name</label>
+        <select formControlName="equipmentname" id="equipmentname" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': equipmentname.touched && equipmentname.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Equipment Name</option>
+          <option *ngFor="let inventory of inventory" [value]="inventory.inventoryId">{{inventory.equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="equipmentname.touched && equipmentname.invalid" class="display-error">
+          <div *ngIf="equipmentname.errors.required">Equipment Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="serialNumber">Equipment Name</label>
+        <select formControlName="serialNumber" id="serialNumber" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': serialNumber.touched && serialNumber.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Serial Number Name</option>
+          <option *ngFor="let inventory of inventory " [value]="inventory.inventoryId">{{inventory.serialNumber}}</option>
+        </select>
+        <div *ngIf="serialNumber.touched && serialNumber.invalid" class="display-error">
+          <div *ngIf="serialNumber.errors.required">Serial Number is required</div>
+        </div>
+      </div>
+      <!-- <div class="form-group required">
+        <label class="control-label field-heading" for="contractStartDate">Contract Start Date </label>
+        <input formControlName="contractStartDate" id="contractStartDate" type="text" class="form-control" placeholder="Contract Start Date"
+            [ngClass]="{'has-error': contractStartDate.touched && contractStartDate.invalid}">
+        <div *ngIf="contractStartDate.touched && contractStartDate.invalid" class="display-error">
+          <div *ngIf="contractStartDate.errors.required">Contract Start Date is required</div>
+        </div>
+      </div> -->
+      <div class="form-group required">
+          <label class="control-label field-heading" for="contractStartDate">Contract Start Date </label>
+          <app-datepicker [value] ="defaultStartDate" (notify)="onNotify($event)"></app-datepicker>
+          <!-- <div *ngIf="contractStartDate.touched && contractStartDate.invalid" class="display-error">
+            <div *ngIf="contractStartDate.errors.required">Contract Start Date is required</div>
+          </div> -->
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="contractEndDate">Contract End Date </label>
+        <app-datepicker [value] ="defaultEndDate" (notify)="onNotifyEndDate($event)"></app-datepicker>
+    </div>
+      <!-- <div class="form-group required">
+        <label class="control-label field-heading" for="contractEndDate">Contract End Date </label>
+        <input formControlName="contractEndDate" id="contractEndDate" type="text" class="form-control" placeholder="Contract End Date"
+            [ngClass]="{'has-error': contractEndDate.touched && contractEndDate.invalid}">
+        <div *ngIf="contractEndDate.touched && contractEndDate.invalid" class="display-error">
+          <div *ngIf="contractEndDate.errors.required">Contract End Date is required</div>
+        </div>
+      </div> -->
+      <div class="form-group required">
+        <label class="control-label field-heading" for="contractType">Contract Type</label>
+        <select formControlName="contractType" id="contractType" class="form-control" (ngModelChange)="selectedContractType($event)" [(ngModel)]="contractSel" [disableControl]="disable"
+            [ngClass]="{'has-error': contractType.touched && contractType.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Contract Type</option>
+          <option *ngFor="let contract of contract" [value]="contract.contractTypeId">{{contract.contractType}}</option>
+        </select>
+        <div *ngIf="contractType.touched && contractType.invalid" class="display-error">
+          <div *ngIf="contractType.errors.required">Contract Type is required</div>
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="control-label field-heading" for="pointOfContact">Point of Contact </label>
+        <input formControlName="pointOfContact" id="pointOfContact" type="text" class="form-control" [(ngModel)] = "customer.pointOfContact" placeholder="Point of Contact"
+            [ngClass]="{'has-error': pointOfContact.touched && pointOfContact.invalid}"> 
+        <div *ngIf="pointOfContact.touched && pointOfContact.invalid" class="display-error">
+          <div *ngIf="pointOfContact.errors.minlength">Point of Contact should be more than {{minlengthName}} characters</div>
+          <div *ngIf="pointOfContact.errors.maxlength">Point of Contact should be less than {{maxLimit}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+          <label class="control-label field-heading" for="contractDetails">Contract Details</label><br/>
+          <div *ngIf="id; then textTab else fileTab"></div>
+          <ng-template #textTab>
+            <input formControlName="contractDetails" id="contractDetails" type="text" class="form-control" [disableControl]="disable" [(ngModel)] ="customerForm.get('contractDetails').value">
+          </ng-template>
+          <ng-template #fileTab>
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+          </ng-template>
+        </div><br>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!customerForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  
+      

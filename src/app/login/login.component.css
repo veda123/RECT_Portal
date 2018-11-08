@@ -1,0 +1,61 @@
+
+.Input-Field {
+   width: 400px; 
+}
+input{
+  padding-left: 50px;
+}
+  
+.title{
+  font-size: 25px;
+  line-height: 1;
+  text-align: center;
+  color: #ffffff;
+}
+  @media (min-width: 544px) {  
+    .title {font-size:20px;}
+  }
+  @media (min-width: 768px) {  
+    .title {font-size:30px;} 
+  }
+  @media (min-width: 992px) {  
+    .title {font-size:40px;} 
+  }
+  @media (min-width: 1200px) {  
+    .title {font-size:50px;} 
+  }
+
+.Username {
+  font-family: Roboto;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+}
+.alert-danger{
+  color: #ff4b4f !important;
+  font-family: Roboto !important;
+  font-weight: bold !important;
+  background-color: #fbe2e2 !important;
+  border-color: #fbe2e2;
+}
+
+input.has-error {
+  color: #d00;
+  outline: none !important;
+  border: 1px solid rgba(255, 0, 0, 0.884);
+}
+
+.has-error .fa-lg{
+  color: #d00;
+  outline: none !important;
+}
+
+img{
+  width: 380px;
+  height: 50px;
+}
+  
+.logo{
+  margin-top : 150px;
+}

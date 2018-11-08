@@ -1,0 +1,78 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6 " [formGroup]="materialsForm" (ngSubmit)="processBillOfMaterials(materialsForm.value)" novalidate>
+      <div *ngIf="materialsForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="equipmentname">Test Set Name</label>
+        <select formControlName="equipmentname" id="equipmentname" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': equipmentname.touched && equipmentname.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select Test Set Name</option>
+          <option *ngFor="let equipment of equipment | sortPipe :'equipmentname'" [value]="equipment.equipmentID">{{equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="equipmentname.touched && equipmentname.invalid" class="display-error">
+          <div *ngIf="equipmentname.errors.required">Equipment Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrupartnumber">LRU PartNumber</label>
+        <input formControlName="lrupartnumber" id="lrupartnumber" type="text" class="form-control" [(ngModel)]="billOfMaterails.lrupartnumber" placeholder="Part Number"
+            [ngClass]="{'has-error': lrupartnumber.touched && lrupartnumber.invalid}">
+        <div *ngIf="lrupartnumber.touched && lrupartnumber.invalid" class="display-error">
+          <div *ngIf="lrupartnumber.errors.required">LRU Part Number is required</div>
+          <div *ngIf="lrupartnumber.errors.minlength">Part Number should be more than {{minlengthName}} characters</div>
+          <div *ngIf="lrupartnumber.errors.maxlength">Part Number should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+          <label class="control-label field-heading" for="equipmentPartNumber">Material Part Number</label>
+          <select formControlName="equipmentPartNumber" id="equipmentPartNumber" class="form-control" (ngModelChange)="selectedEquipPartNumber($event)" [(ngModel)]="partSel" [disableControl]="disable"
+              [ngClass]="{'has-error': equipmentPartNumber.touched && equipmentPartNumber.invalid}">
+            <option [ngValue]="undefined" disabled hidden>Select Material Part Number</option>
+            <option *ngFor="let equipment of equipmentPart | sortPipe :'equipmentPartNumber'" [value]="equipment.equipmentID">{{equipment.equipmentPartNumber}}</option>
+          </select>
+          <div *ngIf="equipmentPartNumber.touched && equipmentPartNumber.invalid" class="display-error">
+            <div *ngIf="equipmentPartNumber.errors.required">Part Number is required</div>
+          </div>
+      </div>
+      <div class="form-group required">
+          <label class="control-label field-heading" for="description">Description</label>
+          <select formControlName="description" id="description" class="form-control" (ngModelChange)="selectedEquipPartNumber($event)" [(ngModel)]="partSel" [disableControl]="disable"
+              [ngClass]="{'has-error': description.touched && description.invalid}">
+            <option [ngValue]="undefined" disabled hidden>Select the description </option>
+            <option *ngFor="let equipment of equipmentPart" [value]="equipment.equipmentID">{{equipment.description}}</option>
+          </select>
+          <div *ngIf="description.touched && description.invalid" class="display-error">
+            <div *ngIf="description.errors.required">Description is required</div>
+          </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="manufacture">Manufacture</label>
+        <input formControlName="manufacture" id="manufacture" type="text" class="form-control" [(ngModel)]="billOfMaterails.manufacture" placeholder="Manufacture"
+            [ngClass]="{'has-error': manufacture.touched && manufacture.invalid}">
+        <div *ngIf="manufacture.touched && manufacture.invalid" class="display-error">
+          <div *ngIf="manufacture.errors.required">Manufacture name is required</div>
+          <div *ngIf="manufacture.errors.minlength">Manufacture name should be more than {{minlengthName}} characters</div>
+          <div *ngIf="manufacture.errors.maxlength">Manufacture name should be less than {{maxManufactureLimit}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="quantity">Quantity</label>
+        <input formControlName="quantity" id="quantity" type="text" class="form-control" [(ngModel)]="billOfMaterails.quantity" placeholder="Quantity"
+            [ngClass]="{'has-error': quantity.touched && quantity.invalid}">
+        <div *ngIf="quantity.touched && quantity.invalid" class="display-error">
+          <div *ngIf="quantity.errors.required">Quantity is required</div>
+          <div *ngIf="quantity.errors.pattern">Invalid Quantity</div>
+          <div *ngIf="quantity.errors.min">Quantity cannot be 0</div>
+          <div *ngIf="quantity.errors.max">Quantity exceeded the maximum limit</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!materialsForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

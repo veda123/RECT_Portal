@@ -1,0 +1,13 @@
+.calendar{
+    width: 1.2rem; 
+    height: 1rem; 
+    cursor: pointer;
+}
+button{
+    border : 1px solid #5dbfd4;
+    outline: none !important;
+}
+
+input{
+    background-color: white !important;
+}

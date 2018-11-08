@@ -1,0 +1,88 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6" [formGroup]="repairCapabilityForm" (ngSubmit)="processCapability(repairCapabilityForm.value)" novalidate>
+        <div *ngIf="repairCapabilityForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>  
+      <div class="form-group required">
+        <label class="control-label field-heading" for="testSetName">Test Set Name</label>
+        <select formControlName="testSetName" id="testSetName" class="form-control" (ngModelChange)="selectedRepairTestName($event)" [(ngModel)]="repairSel" [disableControl]="disable"
+            [ngClass]="{'has-error': testSetName.touched && testSetName.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select Test Set Name</option>
+          <option *ngFor="let equipment of repairEquipment | sortPipe:'equipmentname'" [value]="equipment.equipmentID">{{equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="testSetName.touched && testSetName.invalid" class="display-error">
+          <div *ngIf="testSetName.errors.required">Test Set Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrupartnumber">LRU Part Number</label>
+        <input formControlName="lrupartnumber" id="lrupartnumber" type="text" class="form-control" [(ngModel)] = "repairCapability.lrupartnumber" placeholder="LRU PartNumber" [disableControl]="disable"
+            [ngClass]="{'has-error': lrupartnumber.touched && lrupartnumber.invalid}">
+        <div *ngIf="lrupartnumber.touched && lrupartnumber.invalid" class="display-error">
+          <div *ngIf="lrupartnumber.errors.required">LRU PartNumber is required</div>
+          <div *ngIf="lrupartnumber.errors.minlength"> PartNumber should be more than {{minlengthName}} characters</div>
+          <div *ngIf="lrupartnumber.errors.maxlength"> PartNumber should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrudescription">LRU Description</label>
+        <input formControlName="lrudescription" id="lrudescription" type="text" class="form-control" [(ngModel)] = "repairCapability.lrudescription" placeholder="LRU Description" [disableControl]="disable"
+            [ngClass]="{'has-error': lrudescription.touched && lrudescription.invalid}">
+        <div *ngIf="lrudescription.touched && lrudescription.invalid" class="display-error">
+          <div *ngIf="lrudescription.errors.required">LRU Description is required</div>
+          <div *ngIf="lrudescription.errors.minlength"> Description should be more than {{minlengthName}} characters</div>
+          <div *ngIf="lrudescription.errors.maxlength"> Description should be less than {{maxDescription}} characters</div>
+        </div>
+      </div>
+      <div class="form-group ">
+        <label class="control-label field-heading" for="toolName">Tool Name</label>
+        <select formControlName="toolName" id="toolName" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" >
+          <option [ngValue]="undefined" disabled hidden>Select tool Name</option>
+          <option *ngFor="let equipment of toolEquipment | sortPipe:'equipmentname'" [value]="equipment.equipmentID">{{equipment.equipmentname}}</option>
+        </select>
+      </div>
+      <div class="form-group ">
+        <label class="control-label field-heading" for="description">Tool Description</label>
+        <select formControlName="description" id="description" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel">
+          <option [ngValue]="undefined" disabled hidden>Select tool description</option>
+          <option *ngFor="let equipment of toolEquipment" [value]="equipment.equipmentID">{{equipment.description}}</option>
+        </select>
+      </div>
+      <div class="form-group ">
+        <label class="control-label field-heading" for="toolPartNumber">Tool Part Number</label>
+        <select formControlName="toolPartNumber" id="toolPartNumber" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel">
+          <option [ngValue]="undefined" disabled hidden>Select tool PartNumber</option>
+          <option *ngFor="let equipment of toolEquipment" [value]="equipment.equipmentID">{{equipment.equipmentPartNumber}}</option>
+        </select>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="quantity">Quantity</label>
+        <input formControlName="quantity" id="quantity" type="text" class="form-control" [(ngModel)] = "repairTool.quantity" placeholder="Quantity"
+            [ngClass]="{'has-error': quantity.touched && quantity.invalid}">
+        <div *ngIf="quantity.touched && quantity.invalid" class="display-error">
+          <div *ngIf="quantity.errors.required">Quantity is required</div>
+          <div *ngIf="quantity.errors.pattern">Invalid Quantity</div>
+          <div *ngIf="quantity.errors.min">Quantity cannot be 0</div>
+          <div *ngIf="quantity.errors.max">Quantity exceeded the maximum limit</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="cmm">CMM</label>
+        <input formControlName="cmm" id="cmm" type="text" class="form-control" [(ngModel)] = "repairCapability.cmm" placeholder="CMM" [disableControl]="disable"
+            [ngClass]="{'has-error': cmm.touched && cmm.invalid}">
+        <div *ngIf="cmm.touched && cmm.invalid" class="display-error">
+          <div *ngIf="cmm.errors.required">  CMM is required</div>
+          <div *ngIf="cmm.errors.minlength"> CMM should be more than {{minlengthName}} characters</div>
+          <div *ngIf="cmm.errors.maxlength"> CMM should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class= "btn btn-info btn-md submitButton" [disabled]="!repairCapabilityForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+  

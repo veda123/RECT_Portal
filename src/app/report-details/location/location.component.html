@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="row">
+    <searchTab [tableData] = "locations" (searchValue)="displayFilter($event)"></searchTab>
+    <addButton [nextPageLink]= "nextPageLinkValue">
+      <ng-container>Add New Location</ng-container>
+    </addButton>
+  </div>
+
+  <div class="table-container" #TABLE>
+    <mat-table #table [dataSource]="dataSource" matSort matSortActive="locationName" matSortDirection="asc" matSortDisableClear>
+      <ng-container matColumnDef="locationName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Location Name </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.locationName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef>Address </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.address}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.city}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="country.countryName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Country </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.country.countryName}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="zipcode">
+        <mat-header-cell *matHeaderCellDef>ZipCode </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.zipcode}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef>Phone </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.phone}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="timezone">
+        <mat-header-cell *matHeaderCellDef> TimeZone </mat-header-cell>
+        <mat-cell *matCellDef="let location"> {{location.timezone}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let location">
+          <a [routerLink]="['/admin/location/edit/',location.locationID]" [queryParams]="{countryName:location.country.id}"
+              class="btn Action-Tab">Edit</a>&nbsp;&nbsp;
+          <a class="btn Action-Tab" (click)="deleteLocation(location,location.locationID)">Delete</a>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let location; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50,100]"></mat-paginator>
+  </div>
+  <button type ="button" mat-raised-button class="exportButton" color="primary" (click)="exportData()">Export as Excel</button>
+</div>

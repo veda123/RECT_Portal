@@ -1,0 +1,61 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6 " [formGroup]="locationCapabilityForm" (ngSubmit)="processLocationCap(locationCapabilityForm.value)" novalidate>
+      <div *ngIf="locationCapabilityForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="testSetName">Test Set Name</label>
+        <select formControlName="testSetName" id="testSetName" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': testSetName.touched && testSetName.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select Equipment Name</option>
+          <option *ngFor="let repairCapability of repairCapability" [value]="repairCapability.capabilityId">{{repairCapability.equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="testSetName.touched && testSetName.invalid" class="display-error">
+          <div *ngIf="testSetName.errors.required">Test Set Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrupartnumber">LRU PartNumber</label>
+        <select formControlName="lrupartnumber" id="lrupartnumber" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': lrupartnumber.touched && lrupartnumber.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select LRU PartNumber</option>
+          <option *ngFor="let repairCapability of repairCapability  | sortPipe :'lrupartnumber'" [value]="repairCapability.capabilityId">{{repairCapability.lrupartnumber}}</option>
+        </select>
+        <div *ngIf="lrupartnumber.touched && lrupartnumber.invalid" class="display-error">
+          <div *ngIf="lrupartnumber.errors.required">LRU Part Number is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrudescription">Description</label>
+        <select formControlName="lrudescription" id="lrudescription" class="form-control" (ngModelChange)="selectedEquipName($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+            [ngClass]="{'has-error': lrudescription.touched && lrudescription.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select LRU PartNumber</option>
+          <option *ngFor="let repairCapability of repairCapability  | sortPipe :'lrudescription'" [value]="repairCapability.capabilityId">{{repairCapability.lrudescription}}</option>
+        </select>
+        <div *ngIf="lrudescription.touched && lrudescription.invalid" class="display-error">
+          <div *ngIf="lrudescription.errors.required">Description is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="locationName">Location</label>
+        <select formControlName="locationName" id="locationName" class="form-control" (ngModelChange)="selectedLocation($event)" [(ngModel)]="locSel" [disableControl]="disable"
+            [ngClass]="{'has-error': locationName.touched && locationName.invalid}">
+          <option [ngValue]="undefined" disabled hidden>Select the location</option>
+          <option *ngFor="let location of location  | sortPipe :'locationName'" [value]="location.locationID">{{location.locationName}}</option>
+        </select>
+        <div *ngIf="locationName.touched && locationName.invalid" class="display-error">
+          <div *ngIf="locationName.errors.required">Location is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="manufactureDate">Established Date </label>
+        <app-datepicker [value] ="defaultDate" (notify)="onNotify($event)"></app-datepicker>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class="btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!locationCapabilityForm.valid">SAVE</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

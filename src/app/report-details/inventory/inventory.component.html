@@ -1,0 +1,60 @@
+<div class="container-fluid">
+<div class="row">
+  <searchTab [tableData] = "inventory" (searchValue)="displayFilter($event)"></searchTab>
+  <addButton [nextPageLink]= "nextPageLinkValue">
+    <ng-container>Add New Inventory</ng-container>
+  </addButton>
+</div>
+<div class="table-container" #TABLE> 
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="equipment.equipmentname" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="equipment.equipmentname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Equipment Name </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.equipment.equipmentname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="equipment.equipmentPartNumber">
+      <mat-header-cell *matHeaderCellDef>PartNumber </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.equipment.equipmentPartNumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="serialNumber">
+      <mat-header-cell *matHeaderCellDef>Serial Number </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.serialNumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="rev">
+      <mat-header-cell *matHeaderCellDef>Rev </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.rev}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="manufactureDate">
+      <mat-header-cell *matHeaderCellDef>Manufacture Date </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.manufactureDate |  date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.status}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="owner">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Owner </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.owner}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ownership">
+      <mat-header-cell *matHeaderCellDef >Ownership </mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.ownership}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="location.locationName">
+      <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+      <mat-cell *matCellDef="let inventory"> {{inventory.location.locationName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let inventory">
+        <a class="btn Action-Tab" [routerLink]="['/admin/inventory/edit/',inventory.inventoryId]" 
+          [queryParams]="{name:inventory.equipment.equipmentID,location:inventory.location.locationID}">Edit</a>&nbsp;&nbsp; 
+        <a class="btn Action-Tab" (click)="deleteInventory(inventory.inventoryId)">Delete</a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let inventory; columns: displayedColumns;"></mat-row>  
+    </mat-table>   
+    <mat-paginator [pageSizeOptions]="[10, 20, 50,100]"></mat-paginator>
+</div>
+  <button type="button" mat-raised-button class="exportButton" color="primary" (click)="exportData()">Export as Excel</button>
+</div>

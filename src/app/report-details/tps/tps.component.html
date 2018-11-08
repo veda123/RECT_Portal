@@ -1,0 +1,64 @@
+<div class="container-fluid">
+<div class="row">
+  <searchTab [tableData] = "tps" (searchValue)="displayFilter($event)"></searchTab>
+  <addButton [nextPageLink]= "nextPageLinkValue">
+    <ng-container>Add New TPS detail</ng-container>
+  </addButton>
+</div>
+<div class="table-container" #TABLE> 
+  <mat-table #table [dataSource]="dataSource" matSort matSortActive="repairCapability.equipment.equipmentname" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="repairCapability.equipment.equipmentname">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Test Set Name </mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.repairCapability.equipment.equipmentname}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="repairCapability.lrupartnumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>LRU Part Number</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.repairCapability.lrupartnumber}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tpsName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>TPS Name</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.tpsName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tpsPartnumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>TPS Part Number</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.tpsPart}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="version">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Version</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.version}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="releaseDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Release Date</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.releaseDate | date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="checksum">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>CheckSum</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.checksum}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="checksumType">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>CheckSum Type</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.checksumType}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comments">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Comments</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.comments}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="releaseNotes">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Release Notes</mat-header-cell>
+      <mat-cell *matCellDef="let tps"> {{tps.releaseNotes}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let tps">
+        <a class="btn Action-Tab" [routerLink]="['/admin/tps/edit/',tps.tpsId]"
+        [queryParams]="{name:tps.repairCapability.capabilityId}">Edit</a>&nbsp;&nbsp;
+        <a class="btn Action-Tab" (click)="deleteTPS(tps.tpsId)">Delete</a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let tps; columns: displayedColumns;"></mat-row>  
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50,100]"></mat-paginator>
+  </div>
+  <button type ="button" mat-raised-button color="primary" (click)="exportData()">Export as Excel</button>
+</div>

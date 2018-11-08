@@ -1,0 +1,57 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6 " [formGroup]="equipmentForm" (ngSubmit)="processEquipment(equipmentForm.value)" novalidate>
+      <div *ngIf="equipmentForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
+      <div class="form-group required">
+        <label class="control-label" for="equipmentType">Equipment Type </label>
+        <select  formControlName="equipmentType" id="equipmentType" class="form-control" (ngModelChange)="selectedType($event)" [(ngModel)]="typeSel" [disableControl]="disable"
+          [ngClass]="{'has-error': equipmentType.touched && equipmentType.invalid }">
+          <option  [ngValue]="undefined" disabled hidden>Select Equipment Type</option>
+          <option  *ngFor="let equipType of equipType | sortPipe: 'equipmentType'" [value]="equipType.equipmentTypeID">{{equipType.equipmentType}}</option>
+        </select>
+        <div *ngIf="equipmentType.touched && equipmentType.invalid" class="display-error">
+          <div *ngIf="equipmentType.errors.required">Equipment Type is required</div>
+        </div>
+      </div>
+
+      <div class="form-group required" >
+        <label class="control-label" for="equipmentName">Equipment Name</label>
+        <input formControlName="equipmentname" id="equipmentName" type="text" class="form-control" [(ngModel)] = "equipment.equipmentname" placeholder="Equipment Name"
+            [ngClass]="{'has-error': equipmentname.touched && equipmentname.invalid}">
+        <div *ngIf="equipmentname.touched && equipmentname.invalid" class="display-error">
+          <div *ngIf="equipmentname.errors.required">Equipment Name is required</div>
+          <div *ngIf="equipmentname.errors.pattern">Equipment Name is invalid</div>
+          <div *ngIf="equipmentname.errors.minlength">Equipment Name should be more than {{minlengthName}} characters</div>
+          <div *ngIf="equipmentname.errors.maxlength">Equipment Name should be less than {{maxlengthName}} characters</div>
+        </div>
+       </div>
+      <div class="form-group required" >
+        <label class="control-label" for="equipmentPartNumber">Part Number</label>
+        <input formControlName="equipmentPartNumber" id="equipmentPartNumber" type="text" class="form-control" [(ngModel)] = "equipment.equipmentPartNumber" placeholder="Part Number"
+            [ngClass]="{'has-error': equipmentPartNumber.touched && equipmentPartNumber.invalid}">
+        <div *ngIf="equipmentPartNumber.touched && equipmentPartNumber.invalid" class="display-error">
+          <div *ngIf="equipmentPartNumber.errors.required">Part Number is required</div>
+          <div *ngIf="equipmentPartNumber.errors.minlength">Part Number should be more than {{minlengthName}} characters</div>
+          <div *ngIf="equipmentPartNumber.errors.maxlength">Part Number should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required" >
+        <label class="control-label" for="description">Description</label>
+        <input formControlName="description" id="description" type="text" class="form-control" [(ngModel)] = "equipment.description" placeholder="Description"
+          [ngClass]="{'has-error': description.touched && description.invalid}">
+        <div *ngIf="description.touched && description.invalid" class="display-error">
+          <div *ngIf="description.errors.required">Description is required</div>
+          <div *ngIf="description.errors.minlength">Description should be more than {{minlengthName}} characters</div>
+          <div *ngIf="description.errors.maxlength">Description should be less than {{maxLimit}} characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!equipmentForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>

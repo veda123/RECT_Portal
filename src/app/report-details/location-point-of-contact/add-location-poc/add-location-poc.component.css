@@ -1,0 +1,17 @@
+
+.btn.disabled {
+    margin-bottom:100px !important;
+}
+select{
+    background-color:#394a57;
+    color:white !important;
+}
+select.form-control:focus{
+    background-color: #394a57;
+    color:white;
+}
+
+select.form-control:disabled{
+    background-color:#EBEBE4;
+}
+

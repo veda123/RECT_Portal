@@ -1,0 +1,108 @@
+<div class="form-container-fluid"> 
+  <div class="row justify-content-center align-items-center">
+    <form class="col-lg-6" [formGroup]="tpsForm"  (ngSubmit)="processTPS(tpsForm.value)" novalidate>
+      <div *ngIf="tpsForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="capabilityEquipmentname">Test Set Name</label>
+        <select formControlName="capabilityEquipmentname" id="capabilityEquipmentname" class="form-control" (ngModelChange)="selectedTestName($event)" [(ngModel)]="testSetSel" [disableControl]="disable"
+        [ngClass]="{'has-error': capabilityEquipmentname.touched && capabilityEquipmentname.invalid }">
+            <option [ngValue]="undefined" disabled hidden>Select Test Set Name</option>
+            <option *ngFor="let repairCapability of repairCapability" [value]="repairCapability.capabilityId">{{repairCapability.equipment.equipmentname}}</option>
+        </select>
+        <div *ngIf="capabilityEquipmentname.touched && capabilityEquipmentname.invalid" class="display-error">
+          <div *ngIf="capabilityEquipmentname.errors.required">Test Set Name is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="lrupartnumber">LRU Part Number</label>
+        <select formControlName="lrupartnumber" id="lrupartnumber" class="form-control" (ngModelChange)="selectedTestName($event)" [(ngModel)]="testSetSel" [disableControl]="disable"
+                [ngClass]="{'has-error': lrupartnumber.touched && lrupartnumber.invalid }">
+          <option [ngValue]="undefined" disabled hidden>Select LRU Part Number</option>
+          <option *ngFor="let repairCapability of repairCapability | sortPipe: 'lrupartnumber'" [value]="repairCapability.capabilityId">{{repairCapability.lrupartnumber}}</option>
+        </select>
+        <div *ngIf="lrupartnumber.touched && lrupartnumber.invalid" class="display-error">
+          <div *ngIf="lrupartnumber.errors.required">Test Set Part Number is required</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="tpsName">TPS Name</label>
+        <input formControlName="tpsName" id="tpsName" type="text" class="form-control" [(ngModel)] = "tps.tpsName" placeholder="TPS Name" 
+            [ngClass]="{'has-error': tpsName.touched && tpsName.invalid}">
+        <div *ngIf="tpsName.touched && tpsName.invalid" class="display-error">
+          <div *ngIf="tpsName.errors.required">TPS Name is required</div>
+          <div *ngIf="tpsName.errors.minlength"> TPS Name should be more than {{minlengthName}} characters</div>
+          <div *ngIf="tpsName.errors.maxlength"> TPS Name should be less than {{maxLimit}} characters</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label field-heading" for="tpsPart">TPS PartNumber</label>
+        <input formControlName="tpsPart" id="tpsPart" type="text" class="form-control" [(ngModel)] = "tps.tpsPart" placeholder="TPS Part Number"
+              [ngClass]="{'has-error': tpsPart.touched && tpsPart.invalid }">
+        <div *ngIf="tpsPart.touched && tpsPart.invalid" class="display-error">
+          <div *ngIf="tpsPart.errors.minlength"> TPS Part Number should be more than {{minlengthName}} characters</div>
+          <div *ngIf="tpsPart.errors.maxlength"> TPS Part Number should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="version">TPS Version</label>
+        <input formControlName="version" id="version" type="text" class="form-control" [(ngModel)] = "tps.version"  placeholder="TPS Version" 
+            [ngClass]="{'has-error': version.touched && version.invalid}">
+        <div *ngIf="version.touched && version.invalid" class="display-error">
+          <div *ngIf="version.errors.required">TPS Version is required</div>
+          <div *ngIf="version.errors.maxlength"> TPS Version should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="releaseDate">Release Date</label>
+        <app-datepicker [value] ="defaultDate" (notify)="onNotify($event)"></app-datepicker>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="checksum">CheckSum</label>
+        <input formControlName="checksum" id="checksum" type="text" class="form-control"  [(ngModel)] = "tps.checksum" placeholder="Checksum" 
+            [ngClass]="{'has-error': checksum.touched && checksum.invalid}">
+        <div *ngIf="checksum.touched && checksum.invalid" class="display-error">
+          <div *ngIf="checksum.errors.required">  Checksum is required</div>
+          <div *ngIf="checksum.errors.minlength"> Checksum should be more than {{minlengthName}} characters</div>
+          <div *ngIf="checksum.errors.maxlength"> Checksum should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group required">
+        <label class="control-label field-heading" for="checksumType">CheckSum Type</label>
+        <input formControlName="checksumType" id="checksumType" type="text" class="form-control" [(ngModel)] = "tps.checksumType" placeholder="Checksum Type" 
+            [ngClass]="{'has-error': checksumType.touched && checksumType.invalid}">
+        <div *ngIf="checksumType.touched && checksumType.invalid" class="display-error">
+          <div *ngIf="checksumType.errors.required">CheckSum Type is required</div>
+          <div *ngIf="checksumType.errors.minlength"> CheckSum Type should be more than {{minlengthName}} characters</div>
+          <div *ngIf="checksumType.errors.maxlength"> CheckSum Type should be less than {{maxlengthName}} characters</div>
+        </div>
+      </div>
+      <div class="form-group" >
+        <label class="control-label field-heading" for="comments">Comments</label>
+        <textarea formControlName="comments" class="form-control" id="comments" rows="4"  [(ngModel)] = "tps.comments" placeholder="Comments"
+            [ngClass]="{'has-error': comments.touched && comments.invalid}">
+        </textarea>   
+        <div *ngIf="comments.touched && comments.invalid" class="display-error">
+          <div *ngIf="comments.errors.minlength"> Comments should be more than {{minlengthName}} characters</div>
+         <div *ngIf="comments.errors.maxlength"> Comments should be less than {{maxLimit}} characters</div>
+        </div>  
+      </div>
+      <div class="form-group" >
+        <label class="control-label field-heading" for="releaseNotes">Release Notes</label>
+        <textarea formControlName="releaseNotes" class="form-control" id="releaseNotes" rows="4" [(ngModel)] = "tps.releaseNotes" placeholder="Release Notes"
+            [ngClass]="{'has-error': releaseNotes.touched && releaseNotes.invalid}">
+        </textarea>   
+        <div *ngIf="releaseNotes.touched && releaseNotes.invalid" class="display-error">
+          <div *ngIf="releaseNotes.errors.minlength"> Release Notes should be more than {{minlengthName}} characters</div>
+          <div *ngIf="releaseNotes.errors.maxlength"> Release Notes should be less than {{maxLimit}} characters</div>
+        </div>     
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!tpsForm.valid">SAVE</button>
+          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

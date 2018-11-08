@@ -1,0 +1,8 @@
+select{
+    background-color:#394a57;
+    color:white !important;
+}
+select.form-control:focus{
+    background-color: #394a57;
+    color:white;
+}

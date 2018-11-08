@@ -1,0 +1,65 @@
+<div class="form-container-fluid"> 
+    <div class="row justify-content-center align-items-center">
+      <form class="col-lg-6" [formGroup]="contactForm" (ngSubmit)="processLocationPOC(contactForm.value)" novalidate>
+        <div *ngIf="contactForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>  
+        <div class="form-group required">
+          <label class="control-label field-heading" for="name">Location Name</label>
+          <select formControlName="locationName" id="name" class="form-control" (ngModelChange)="selectedLocation($event)" [(ngModel)]="locsel" [disableControl]="disable"
+          [ngClass]="{'has-error': locationName.touched && locationName.invalid }">
+              <option [ngValue]="undefined" disabled hidden>Select Location</option>
+              <option *ngFor="let location of location | sortPipe : 'locationName'" [value]="location.locationID">{{location.locationName}}</option>
+          </select>
+          <div *ngIf="locationName.touched && locationName.invalid" class="display-error">
+            <div *ngIf="locationName.errors.required">Location Name is required</div>
+          </div>
+        </div>
+        <div class="form-group required" >
+          <label class="control-label field-heading" for="contactName">Contact Name</label>
+          <input formControlName="contactName" id="contactName" type="text" class="form-control" [(ngModel)] = "locationPOC.contactName" placeholder="Contact Name"
+          [ngClass]="{'has-error': contactName.touched && contactName.invalid}">
+          <div *ngIf="contactName.touched && contactName.invalid" class="display-error">
+            <div *ngIf="contactName.errors.required">Contact Name is required</div>
+            <div *ngIf="contactName.errors.pattern">Invalid Contact Name</div>
+            <div *ngIf="contactName.errors.minlength">Contact Name should be more than {{minlengthName}} characters</div>
+            <div *ngIf="contactName.errors.maxlength">Contact Name should be less than {{maxlengthName}} characters</div>
+          </div>
+        </div>
+        <div class="form-group required" >
+          <label class="control-label field-heading" for="email">Contact Email</label>
+          <input formControlName="email" id="email" type="text" class="form-control" [(ngModel)] = "locationPOC.email"  placeholder="Contact Email"
+               [ngClass]="{'has-error': email.touched && email.invalid}">
+          <div *ngIf="email.touched && email.invalid" class="display-error">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.pattern">Invalid Email</div>
+            <div *ngIf="email.errors.maxlength">Email should be less than {{maxlengthName}} characters</div>
+          </div> 
+        </div>
+        <div class="form-group" >
+          <label class="field-heading" for="phone">Phone</label>
+          <input formControlName="phone" id="phone" type="text" class="form-control" [(ngModel)] = "locationPOC.phone"  placeholder="Phone"
+                [ngClass]="{'has-error': phone.touched && phone.invalid }">
+          <div *ngIf="phone.touched && phone.invalid" class="display-error">
+            <div *ngIf="phone.errors.pattern">Phone number is invalid</div>
+            <div *ngIf="phone.errors.maxlength">Phone number exceeded the maximum length </div>
+          </div>
+        </div>
+        <div class="form-group" >
+          <label class="field-heading" for="title">Title</label>
+          <input formControlName="title" id="title" type="text" class="form-control" [(ngModel)] = "locationPOC.title" placeholder="Title"
+          [ngClass]="{'has-error': title.touched && title.invalid}">
+          <div *ngIf="title.touched && title.invalid" class="display-error">
+            <div *ngIf="title.errors.minlength">Title should be more than {{minlengthName}} characters</div>
+            <div *ngIf="title.errors.maxlength">Title should be less than {{maxTitleValue}} characters</div>
+          </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
+                <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!contactForm.valid">SAVE</button>
+                <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+             </div>
+        </div>
+      </form>
+    </div>
+ </div>
+
