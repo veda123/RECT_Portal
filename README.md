@@ -7,11 +7,11 @@ Check out the live demo at https://rect-app-portal.herokuapp.com/login.
 
 Steps to Setup the Front end app.
 
-Clone the application
+1) Clone the application
 
 git clone https://github.com/veda123/RECT_Portal.git
 
-Then type the following commands to install the dependencies and start the application -
+2) Then type the following commands to install the dependencies and start the application -
 
 #Global
 
