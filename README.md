@@ -1,6 +1,5 @@
 # Repair Equipment Configuration Tool
 
-Live Demo
 The application is hosted on Heroku. 
 
 Check out the live demo at https://rect-app-portal.herokuapp.com/login.
