@@ -1,10 +1,10 @@
 <div class="container-fluid">
-    <div class="row">
-        <searchTab [tableData] = "equipment" (searchValue)="displayFilter($event)"></searchTab>
-          <addButton [nextPageLink]= "nextPageLinkValue">
-            <ng-container>Add New Equipment</ng-container>
-          </addButton>
-      </div>
+  <div class="row col-sm-12">
+    <searchTab [tableData]="equipment" (searchValue)="displayFilter($event)"></searchTab>
+    <addButton [nextPageLink]="nextPageLinkValue">
+      <ng-container>Add New Equipment</ng-container>
+    </addButton>
+  </div>
   <div class="table-container" #TABLE> 
     <mat-table #table [dataSource]="dataSource" matSort matSortActive="equipmentname" matSortDirection="asc" matSortDisableClear>
       <ng-container matColumnDef="equipmentname">
@@ -12,8 +12,7 @@
         <mat-cell *matCellDef="let equipment"> {{equipment.equipmentname}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="equipmentPartNumber">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Part Number </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Part Number </mat-header-cell>
         <mat-cell *matCellDef="let equipment"> {{equipment.equipmentPartNumber}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="description">
@@ -25,14 +24,18 @@
         <mat-cell *matCellDef="let equipment">{{equipment.equipmentType.equipmentType}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
-          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-          <mat-cell *matCellDef="let equipment">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let equipment">
+          <div class="btn-group mr-1" role="group">
             <a class="btn Action-Tab" [routerLink]="['/admin/equipment/edit/',equipment.equipmentID]" 
-              [queryParams]="{name:equipment.equipmentType.equipmentTypeID}">Edit</a>&nbsp;&nbsp; 
-            <a class="btn Action-Tab" (click)="deleteEquipmentDetails(equipment.equipmentID)">Delete</a>
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              [queryParams]="{name:equipment.equipmentType.equipmentTypeID}"><span class="fa fa-edit mr-1"></span>Edit</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn Action-Tab" (click)="deleteEquipmentDetails(equipment.equipmentID)"><span class="fa fa-trash mr-1"></span>Delete</a>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let equipment; columns: displayedColumns;"></mat-row>
       </mat-table>
       <mat-paginator [pageSizeOptions]="[10, 20, 50,100]"></mat-paginator>

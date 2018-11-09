@@ -15,7 +15,8 @@ export class DatepickerComponent implements OnInit {
   model:any;
   imagePath:string = "../assets/images/calendar.png";
   datePattern:string ="\d{4}-\d{2}-\d{2}";
-  // datePattern ="[a-zA-Z\\s]+";
+
+  //declaring input and ouput variables
   @Input() value :string;
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
@@ -27,6 +28,7 @@ export class DatepickerComponent implements OnInit {
 
   ngOnInit() { } 
 
+  //sends the selected date from calendar to the calling component
   onDateChange(dt:any) {
     if(dt.month < 10){
       dt.month= '0'+dt.month;

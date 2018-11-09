@@ -1,9 +1,19 @@
 .search-tab{
     border: solid 3px #5dbfd4;
     border-radius: 6.5px;
-    width : 600px; 
+    width : 200px; 
     height:40px;   
  }
  .mat-input-element{
     padding-left: 50px;
 }
+
+@media (min-width: 544px) {
+    .search-tab{ width : 300px;}   
+}
+@media (min-width: 768px) {
+    .search-tab{ width : 400px;}  
+}
+@media (min-width: 1600px) {
+    .search-tab{ width : 500px;}     
+} 

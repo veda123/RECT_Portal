@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="row">
+<div class="row col-sm-12">
   <searchTab [tableData] = "locationCap" (searchValue)="displayFilter($event)"></searchTab>
   <addButton [nextPageLink]= "nextPageLinkValue">
     <ng-container>Add New Repair Capability</ng-container>
@@ -30,10 +30,15 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
       <mat-cell *matCellDef="let locationCap">
-        <a class="btn Action-Tab" [routerLink]="['/admin/repairCapability/edit/',locationCap.locationCapID]" 
-        [queryParams]="{repairId:locationCap.repairCapability.capabilityId,locationId:locationCap.location.locationID}">Edit</a>&nbsp;&nbsp;  
-        <a class="btn Action-Tab" (click)="deleteLocationCapability(locationCap.locationCapID)">Delete</a>
-      </mat-cell>
+        <div class="btn-group mr-1" role="group">
+          <a class="btn Action-Tab" [routerLink]="['/admin/repairCapability/edit/',locationCap.locationCapID]" 
+            [queryParams]="{repairId:locationCap.repairCapability.capabilityId,locationId:locationCap.location.locationID}">
+          <span class="fa fa-edit mr-2"></span>Edit</a>
+        </div>
+        <div class="btn-group" role="group">
+          <a class="btn Action-Tab" (click)="deleteLocationCapability(locationCap.locationCapID)"><span class="fa fa-trash mr-1"></span>Delete</a>
+        </div>
+        </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let locationCap; columns: displayedColumns;"></mat-row>  

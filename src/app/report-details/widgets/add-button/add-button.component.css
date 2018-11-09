@@ -1,15 +1,35 @@
 .Tab {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 500;
     background-color: #5dbfd4;
     border: solid 1px #5dbfd4;
     color: #ffffff!important;
 }  
 
+@media (min-width: 544px) {
+    .Tab{
+         font-size: 15px;
+        font-weight: 500;
+    }
+}
+@media (min-width: 768px) {
+    .Tab{
+         font-size: 16px;
+        font-weight: 600;
+    }
+}
+@media (min-width: 992px) {
+    .Tab{
+         font-size: 18px;
+        font-weight: 700;
+    }
+}
+
 .hdr-user{
-    width : 300px; 
+    /* width : 300px;  */
     height:40px;    
 }
+
 
 
 

@@ -62,17 +62,17 @@
         <div *ngIf="quantity.touched && quantity.invalid" class="display-error">
           <div *ngIf="quantity.errors.required">Quantity is required</div>
           <div *ngIf="quantity.errors.pattern">Invalid Quantity</div>
-          <div *ngIf="quantity.errors.min">Quantity cannot be 0</div>
+          <div *ngIf="quantity.errors.min">Minimum value should be 1</div>
           <div *ngIf="quantity.errors.max">Quantity exceeded the maximum limit</div>
         </div>
       </div>
       <div class="form-group">
-        <div class="row">
-          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
-          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!materialsForm.valid">SAVE</button>
-          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
-          </div>
+        <div class="row justify-content-center align-items-center col-sm-12">
+          <button type="button" class="col-sm-3 btn btn-danger btn-md backButton" Goback><span class="fa fa-hand-o-left"></span>&nbsp;BACK</button>      
+          <button type="submit" class="col-sm-3 btn btn-info btn-md submitButton" [disabled]="!materialsForm.valid"><span class="fa fa-save"></span>&nbsp;SAVE</button>
+          <button type="button" class="col-sm-3 btn btn-md resetButton" (click)="reset()"><span class="fa fa-undo"></span>&nbsp;RESET</button>
         </div>
+      </div>
     </form>
   </div>
 </div>

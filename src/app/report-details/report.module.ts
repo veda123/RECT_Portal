@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { ROUTES } from './report.routes';
 import { LocationComponent } from './location/location.component';
-import { HeaderComponent } from './header/header.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CommonModule } from "@angular/common";
 import { LocationPointOfContactComponent } from './location-point-of-contact/location-point-of-contact.component';
@@ -37,12 +36,11 @@ import { BillOfMaterialsComponent } from './bill-of-materials/bill-of-materials.
 import { AddMaterialsComponent } from './bill-of-materials/add-materials/add-materials.component';
 import { LocationCapabilityComponent } from './location-capability/location-capability.component';
 import { AddLocationCapComponent } from './location-capability/add-location-cap/add-location-cap.component';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { SharedModule } from '../sharedModule';
 
 @NgModule({
   declarations: [
     LocationComponent,
-    HeaderComponent,
     AdminPanelComponent,
     LocationPointOfContactComponent,
     AddLocationComponent,
@@ -83,6 +81,7 @@ import { PageNotFoundComponent } from '../page-not-found/page-not-found.componen
     MatIconModule,
     MatNativeDateModule,
     NgbModule,
+    SharedModule,
     RouterModule.forChild(ROUTES)
   ]
 })

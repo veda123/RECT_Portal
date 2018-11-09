@@ -2,6 +2,81 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+#okta-login-container {
+    background-color: whitesmoke;
+    margin: 0 auto;
+    max-width: 300px;
+    border: 1px solid silver;
+    padding: 20px;
+    /* box-shadow: 5px 5px 5px 0 silver; */
+  }
+  
+  .okta-form-title {
+    /* color:white; */
+    /* text-align: center; */
+    font-size: 15px;
+}
+
+.custom-checkbox{
+  /* color:white; */
+  font-size: 10px;
+}
+
+  @media (min-width: 544px) {  
+    #okta-login-container {max-width: 350px;}
+    .okta-form-title { font-size: 20px;}
+    .custom-checkbox{ font-size: 15px};
+  }
+  @media (min-width: 768px) {  
+    #okta-login-container {max-width: 380px;}
+  }
+  @media (min-width: 992px) {  
+    #okta-login-container {max-width: 400px;}
+  }
+  @media (min-width: 1200px) {  
+    /* #okta-login-container{max-width: 425px;} */
+    .okta-form-title { font-size: 25px;} 
+  }
+
+  .none{
+    background-color: whitesmoke;
+  }
+  
+  #okta-login-container input {
+    border-radius: 4.5px;
+    border : 1px solid #5dbfd4 !important;
+    outline: none !important;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 5px;
+  }
+
+  
+  #okta-login-container input[type=checkbox] {
+    outline: none !important;
+    border : 1px solid #5dbfd4 !important;
+    width: 25px;
+  }
+  
+  .okta-form-input-error{
+      color: red;
+  }
+  .okta-form-infobox-error{
+    color: red;
+    font-size:15px;
+  }
+
+  #okta-signin-submit{
+    border-radius: 4.5px;
+    /* border-bottom-right-radius: 4.5px; */
+    background-color: #5dbfd4;
+    color:white;
+    font-weight: bold;
+  }
+  /* .o-form-button-bar{
+    background-color: #5dbfd4;
+}  */
+  
 body{
     font-family: "Roboto","Helvetica Neue","sans-serif"; 
     font-weight: normal;
@@ -48,7 +123,6 @@ input.has-error, textarea.has-error, select.has-error{
     border: 1px solid rgba(255, 0, 0, 0.884) !important;
 }
 
-
 select{
     border : 1px solid #5dbfd4 !important;
 }
@@ -80,13 +154,22 @@ select.form-control:disabled{
 }
 
 addButton {
-    position: absolute;
+    /* position: absolute;
     right: 50px;
-    margin-top:30px;
+    margin-top:30px; */
+    margin-left: auto;
+    text-align: right;
+    /* margin-top:30px; */
+}
+
+@media only screen and (min-width: 736px) {
+    addButton{
+        margin-top:30px !important;
+    }
 }
 
 searchTab{
-    padding:5px 30px;
+    padding:5px 0px;
 }
 
 .table-container {
@@ -108,14 +191,16 @@ searchTab{
 }
 
 .mat-header-row{
-    background-color: #394a57 !important;   
+    background-color: #394a57 !important;
 }
 
-.mat-header-cell{
+.mat-header-cell, .mat-header-cell-def{
     color: white !important;
     font-family: 'Source Sans Pro';
-    font-size: 18px !important;
+    font-size: 18px;
     font-weight: 800 !important;
+    position: sticky;
+    z-index: 1;
 }
 
 mat-column-action {
@@ -149,13 +234,25 @@ mat-row:hover {
     top: calc(60% - 0.5em);
 }
 
+@media only screen and (max-width: 736px) and (orientation:portrait) {
+    mat-header-row, mat-row {
+      width: 200%;
+    }
+    .mat-header-cell{
+        font-size: 14px !important;
+    }
+}
+
 .Action-Tab {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1;
+    width:90px;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
     background-color: #5dbfd4;
     border: solid 1px #5dbfd4;
     color: #ffffff !important;
+    /* margin-top:5px; */
+    /* margin-bottom : 5px; */
 }
 
 /* add/edit form styling*/
@@ -175,14 +272,10 @@ label{
 .submitButton, .backButton, .resetButton {
     display: inline-block;
     margin-left:10px ;
-    width : 200px;
     font-weight: bold;
 }
-.backButton{
-    margin-left:100px ;
-}
+
 .resetButton {
-    margin-right : 150px;
     background-color:#253746;  
     color:white;
 }
@@ -204,4 +297,37 @@ label{
     height:100%;
     top:0px;
     left:0px; 
+}
+
+.splash{
+    width:100%;
+    height:100%;
+}
+
+.spinButton{
+    display: block;
+    margin : 0 auto;
+    position: fixed;
+    top: 50%;
+    left:50%;
+    font-size:60px;
+    color: #253746;
+}
+
+@media (min-width: 544px) {  
+    .spinButton{font-size:50px;}
+  }
+  @media (min-width: 768px) {  
+    .spinButton{font-size:60px;}
+  }
+  @media (min-width: 992px) {  
+    .spinButton{font-size:80px;}
+  }
+  @media (min-width: 1200px) {  
+    .spinButton{font-size:100px;}
+  }
+
+.btn-group{
+    margin-top:5px;
+    margin-bottom : 5px;
 }

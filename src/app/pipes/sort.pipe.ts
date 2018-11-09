@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
+  //sorting logic based on user selection of the fields
   transform(array: Array<string>, args: string): Array<string> {
     array.sort((a:any, b:any) =>{
       if (a[args].toLowerCase() < b[args].toLowerCase())      return -1;

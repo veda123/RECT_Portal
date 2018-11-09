@@ -1,6 +1,6 @@
 <div class="form-container-fluid"> 
   <div class="row justify-content-center align-items-center">
-    <form class="col-lg-6 " [formGroup]="equipmentForm" (ngSubmit)="processEquipment(equipmentForm.value)" novalidate>
+    <form class="col-md-5" [formGroup]="equipmentForm" (ngSubmit)="processEquipment(equipmentForm.value)" novalidate>
       <div *ngIf="equipmentForm.errors || invalidLogin" class="alert alert-danger">Please check errors and try again</div>
       <div class="form-group required">
         <label class="control-label" for="equipmentType">Equipment Type </label>
@@ -46,10 +46,10 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="row">
-          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
-          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!equipmentForm.valid">SAVE</button>
-          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        <div class="row justify-content-center align-items-center col-sm-12">
+          <button type="button" class="col-sm-3 btn btn-danger btn-md backButton" Goback><span class="fa fa-hand-o-left"></span>&nbsp;BACK</button>      
+          <button type="submit" class="col-sm-3 btn btn-info btn-md submitButton" [disabled]="!equipmentForm.valid"><span class="fa fa-save"></span>&nbsp;SAVE</button>
+          <button type="button" class="col-sm-3 btn btn-md resetButton" (click)="reset()"><span class="fa fa-undo"></span>&nbsp;RESET</button>
           </div>
         </div>
     </form>

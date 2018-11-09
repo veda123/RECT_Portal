@@ -49,6 +49,16 @@ import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AllReportsComponent } from './all-reports/all-reports.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ModalComponent } from './report-details/modal/modal.component';
+import { Okta } from './shared/okta/okta.service';
+import {  OktaAuthModule } from '@okta/okta-angular';
+import { LoginRedirectComponent } from './login-redirect/login-redirect.component'
+import { SharedModule } from './sharedModule';
+
+const config = {
+  issuer: 'https://dev-764880.oktapreview.com/oauth2/default',
+  redirectUri: 'http://localhost:4200/implicit/callback',
+  clientId: '0oag8yv4txsXLDfZ40h7'
+};
 
 @NgModule({
   declarations: [
@@ -58,7 +68,8 @@ import { ModalComponent } from './report-details/modal/modal.component';
     PageNotFoundComponent,
     AllReportsComponent,
     AccessDeniedComponent,
-    ModalComponent
+    ModalComponent,
+    LoginRedirectComponent
  ],
   entryComponents: [ConfirmationDialogComponent],
   imports: [
@@ -68,10 +79,12 @@ import { ModalComponent } from './report-details/modal/modal.component';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    OktaAuthModule.initAuth(config),
+    SharedModule
   ],
   providers: [LocationService,LocationPocService,ConfirmationDialogService,CountryService,AuthService,BomService,LocationCapabilityService,UploadFileService,AuthGuard,
-    LocationGuard,LocationPocGuard,LocationCapGuard,CustomerGuard,InventoryGuard,EquipmentGuard,RepairKitGuard,TpsGuard,BomGuard,AdminAuthGuard,
+    LocationGuard,LocationPocGuard,LocationCapGuard,CustomerGuard,InventoryGuard,EquipmentGuard,RepairKitGuard,TpsGuard,BomGuard,AdminAuthGuard,Okta,
     EquipmentService,EquipmentTypeService,CustomerService,ContractTypeService,InventoryService,RepairToolsService,RepairCapabilityService,TpsService,DateInitService,
     {
       provide:HTTP_INTERCEPTORS,

@@ -84,7 +84,7 @@ export class AddEquipmentComponent implements OnInit {
       error => this.invalidLogin = true);  
     }
   }
-
+  
   getEquipType():any{
     this.equipTypeService.getEquipmentType()
         .subscribe(equipType => this.equipType = equipType,

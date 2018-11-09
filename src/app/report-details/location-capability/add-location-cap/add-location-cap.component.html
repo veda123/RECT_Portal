@@ -51,11 +51,11 @@
         <app-datepicker [value] ="defaultDate" (notify)="onNotify($event)"></app-datepicker>
       </div>
       <div class="form-group">
-        <div class="row">
-          <button type="button" class="btn btn-danger btn-md backButton" Goback >BACK</button>      
-          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!locationCapabilityForm.valid">SAVE</button>
-          </div>
+        <div class="row justify-content-center align-items-center col-sm-12">
+          <button type="button" class="col-sm-3 btn btn-danger btn-md backButton" Goback><span class="fa fa-hand-o-left"></span>&nbsp;BACK</button>      
+          <button type="submit" class="col-sm-3 btn btn-info btn-md submitButton" [disabled]="!locationCapabilityForm.valid"><span class="fa fa-save"></span>&nbsp;SAVE</button>
         </div>
+      </div>
     </form>
   </div>
 </div>

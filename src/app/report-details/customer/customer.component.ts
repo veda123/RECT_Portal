@@ -47,6 +47,7 @@ export class CustomerComponent implements OnInit {
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
+  //downloads the contract information once the user clicks on the link
   downloadFile(fileId:string,fileName:string){
     this.uploadService.downloadFile(fileId)
         .subscribe(file => {
@@ -136,7 +137,6 @@ export class CustomerComponent implements OnInit {
       CSV += row + '\r\n';
     }
     if (CSV == '') {        
-      alert("Invalid data");
       return;
     }   
     var uri = 'data:text/csv;charset=utf-8,' + encodeURI(CSV);

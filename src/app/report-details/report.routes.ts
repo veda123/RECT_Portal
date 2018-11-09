@@ -1,3 +1,4 @@
+import { EquipmentGuard } from './../services/equipment-guard.service';
 import { Routes } from '@angular/router';
 import { LocationComponent } from './location/location.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
@@ -25,7 +26,6 @@ import { LocationPocGuard } from '../services/location-poc-guard.service';
 import { LocationCapGuard } from '../services/location-cap-guard.service';
 import { CustomerGuard } from '../services/customer-guard.service';
 import { InventoryGuard } from '../services/inventory-guard.service';
-import { EquipmentGuard } from '../services/equipment-guard.service';
 import { RepairKitGuard } from '../services/repair-kit-guard.service';
 import { TpsGuard } from '../services/tps-guard.service';
 import { BomGuard } from '../services/bom-guard.service';

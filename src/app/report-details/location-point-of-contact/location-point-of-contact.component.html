@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row col-sm-12">
     <searchTab [tableData] = "locationPOC" (searchValue)="displayFilter($event)"></searchTab>
       <addButton [nextPageLink]= "nextPageLinkValue">
         <ng-container>Add New Contact Details</ng-container>
@@ -31,9 +31,13 @@
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
         <mat-cell *matCellDef="let locationPOC">
-          <a class="btn Action-Tab" [routerLink]="['/admin/locationPOC/edit/',locationPOC.id]"
-              [queryParams]="{name:locationPOC.location.locationID}">Edit</a>&nbsp;&nbsp;
-          <a class="btn Action-Tab" (click)="deleteContact(locationPOC.id)">Delete</a>
+          <div class="btn-group mr-1" role="group">
+            <a class="btn Action-Tab" [routerLink]="['/admin/locationPOC/edit/',locationPOC.id]" [queryParams]="{name:locationPOC.location.locationID}">
+              <span class="fa fa-edit mr-2"></span>Edit</a>
+          </div>
+          <div class="btn-group" role="group">
+            <a class="btn Action-Tab" (click)="deleteContact(locationPOC.id)"><span class="fa fa-trash mr-1"></span>Delete</a>
+          </div> 
         </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

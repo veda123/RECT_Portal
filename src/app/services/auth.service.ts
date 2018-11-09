@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -7,13 +8,14 @@ import { ICredentials } from '../ICredentails';
 import { HttpClient, HttpErrorResponse, HttpHeaders  } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { IAuthToken } from '../IAuthToken';
-
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { IUser } from '../IUser';
 import { environment } from '../../environments/environment';
+import { OktaAuthService } from '@okta/okta-angular';
 
 @Injectable()
 export class AuthService {
+  group: any;
   private baseUrl:string = environment.baseUrl;
   private httpOptions = {
     headers: new HttpHeaders({
@@ -22,44 +24,29 @@ export class AuthService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private oktaAuth:OktaAuthService) { }
 
-  login(credentials : ICredentials):Observable<IAuthToken> {
-    return this.http.post(this.baseUrl+'/auth/signin',JSON.stringify(credentials),this.httpOptions)
-               .pipe(catchError(this.handleError));
-  }
-
-  getToken(): string {
-    return localStorage.getItem('token');
-  }
-
-  currentUser(id:number):Observable<IUser>{
-    return this.http.get(this.baseUrl+'/users/'+id)
-        .pipe(catchError(this.handleError));
-  }
-
-  userName(value):Observable<IUser>{
-      return this.http.get(this.baseUrl+'/users/',{ params: {name: value}})
-                 .pipe(catchError(this.handleError));   
-  }
-  
-  getRole():boolean{
+   getAdmin(){
     let token = localStorage.getItem('token');
     let value = new JwtHelper().decodeToken(token);
-    if(value.roles[0] === "ROLE_ADMIN") return true;
+    if(value.groups.includes("Test-Set-Engineering")) return true; //checks whether the user is admin or not
     return false;
   }
 
-  isLoggedIn():boolean{
-    return tokenNotExpired();
+  async getUser(){
+    const accessToken = await this.oktaAuth.getAccessToken();
+    localStorage.setItem("token",accessToken);
+    return new JwtHelper().decodeToken(accessToken);
   }
-  
-  logOut():void{
-    localStorage.removeItem('token');
+
+  isLoggedIn():boolean{
+    return tokenNotExpired(); // returns true if token is expired or vice versa
   }
 
   private handleError(error: HttpErrorResponse) {
     return Observable.throw(error.statusText);
   }
-
 }
+  
+
+

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="row">
+  <div class="row col-sm-12">
     <searchTab [tableData] = "customer" (searchValue)="displayFilter($event)"></searchTab>
     <addButton [nextPageLink]= "nextPageLinkValue">
       <ng-container>Add New Repair Kit</ng-container>
@@ -42,9 +42,15 @@
     <ng-container matColumnDef="action">
       <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
       <mat-cell *matCellDef="let repairTool">
-        <a class="btn Action-Tab" [routerLink]="['/admin/Repair-kits/edit/',repairTool.repairToolId]"
-        [queryParams]="{topLevelName:repairTool.repairCapability.equipment.equipmentID,toolReq:repairTool.equipment?.equipmentID ? repairTool.equipment.equipmentID : '',req:repairTool.repairCapability.capabilityId}">Edit</a>&nbsp;&nbsp; 
-        <a class="btn Action-Tab" (click)="deleteRepairTool(repairTool.repairToolId,repairTool.repairCapability.capabilityId)">Delete</a>
+        <div class="btn-group mr-1" role="group">
+          <a class="btn Action-Tab" [routerLink]="['/admin/Repair-kits/edit/',repairTool.repairToolId]"
+            [queryParams]="{topLevelName:repairTool.repairCapability.equipment.equipmentID,toolReq:repairTool.equipment?.equipmentID ? repairTool.equipment.equipmentID : '',req:repairTool.repairCapability.capabilityId}">
+            <span class="fa fa-edit mr-2"></span>Edit</a>
+        </div>
+        <div class="btn-group" role="group">
+          <a class="btn Action-Tab" (click)="deleteRepairTool(repairTool.repairToolId,repairTool.repairCapability.capabilityId)">
+            <span class="fa fa-trash mr-1"></span>Delete</a>
+          </div>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

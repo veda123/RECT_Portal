@@ -26,11 +26,13 @@ export class BillOfMaterialsComponent implements OnInit {
     this.getAllBillOfMaterials();
   }
 
+  //gets all bill of materials details from the database once page loads
   getAllBillOfMaterials():any{
     this.BOMService.getBOM()
       .subscribe(BOM =>{
         this.billOfMaterials = BOM;
         this.dataSource = new MatTableDataSource(this.billOfMaterials);
+        //filters the user entered input related data
         this.dataSource.filterPredicate = (data, filter: string)  => {
           const accumulator = (currentTerm, key) => {
             if(key === 'equipment')
@@ -48,6 +50,7 @@ export class BillOfMaterialsComponent implements OnInit {
           const transformedFilter = filter.trim().toLowerCase();
           return dataStr.indexOf(transformedFilter) !== -1;
         };
+        //sorts the data based on user selection
         this.dataSource.sortingDataAccessor = (item, property) => {
           switch(property) {
             case 'equipment.equipmentname': return item.equipment.equipmentname;
@@ -66,7 +69,7 @@ export class BillOfMaterialsComponent implements OnInit {
     this.confirmationDialogService.confirm('Delete confirmation', "Are you sure you want to delete this Material information?")
     .then((confirmed) =>{ 
        if(!confirmed)  return;
-       this.BOMService.deleteBOM(materialId)
+       this.BOMService.deleteBOM(materialId) //involes the delete service call and displays the updated info on the UI
           .subscribe((data) => this.getAllBillOfMaterials(),
           (error)=>{ this.errorMessage = <any>error;});   
     })
@@ -82,12 +85,14 @@ export class BillOfMaterialsComponent implements OnInit {
     for (let element in clonedDataSource){
       delete clonedDataSource[element].billID;
     }
-    this.JSONToCSVConvertor(clonedDataSource,"Bill-of-Materails_Details",this.ShowLabel);   
+    this.JSONToCSVConvertor(clonedDataSource,"Bill-of-Materails_Details",this.ShowLabel);   //Convert JSON to CSV
   }
   
   JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+     //If JSONData is not an object then JSON.parse will parse the JSON string in an Object
     let arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
     let CSV = '';    
+     //This condition will generate the Header
     if (ShowLabel) {
       let row = "";
       for (let index in ShowLabel) {
@@ -117,7 +122,6 @@ export class BillOfMaterialsComponent implements OnInit {
       CSV += row + '\r\n';
     }
     if (CSV == '') {        
-      alert("Invalid data");
       return;
     }   
   //Initialize file format you want csv or xls

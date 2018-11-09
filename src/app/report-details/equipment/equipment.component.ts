@@ -40,7 +40,7 @@ export class EquipmentComponent implements OnInit {
             const accumulator = (currentTerm, key) => {
             return key === 'equipmentType' ? currentTerm + data.equipmentType.equipmentType : currentTerm + data[key];
             };
-            const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+            const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase(); //converts to lowercase before comparing
             const transformedFilter = filter.trim().toLowerCase();
             return dataStr.indexOf(transformedFilter) !== -1;
         };
@@ -102,7 +102,6 @@ export class EquipmentComponent implements OnInit {
       CSV += row + '\r\n';
     }
     if (CSV == '') {        
-      alert("Invalid data");
       return;
     }   
     var uri = 'data:text/csv;charset=utf-8,' + encodeURI(CSV);

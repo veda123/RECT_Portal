@@ -37,33 +37,14 @@
           <div *ngIf="serialNumber.errors.required">Serial Number is required</div>
         </div>
       </div>
-      <!-- <div class="form-group required">
-        <label class="control-label field-heading" for="contractStartDate">Contract Start Date </label>
-        <input formControlName="contractStartDate" id="contractStartDate" type="text" class="form-control" placeholder="Contract Start Date"
-            [ngClass]="{'has-error': contractStartDate.touched && contractStartDate.invalid}">
-        <div *ngIf="contractStartDate.touched && contractStartDate.invalid" class="display-error">
-          <div *ngIf="contractStartDate.errors.required">Contract Start Date is required</div>
-        </div>
-      </div> -->
       <div class="form-group required">
           <label class="control-label field-heading" for="contractStartDate">Contract Start Date </label>
           <app-datepicker [value] ="defaultStartDate" (notify)="onNotify($event)"></app-datepicker>
-          <!-- <div *ngIf="contractStartDate.touched && contractStartDate.invalid" class="display-error">
-            <div *ngIf="contractStartDate.errors.required">Contract Start Date is required</div>
-          </div> -->
       </div>
       <div class="form-group required">
         <label class="control-label field-heading" for="contractEndDate">Contract End Date </label>
         <app-datepicker [value] ="defaultEndDate" (notify)="onNotifyEndDate($event)"></app-datepicker>
-    </div>
-      <!-- <div class="form-group required">
-        <label class="control-label field-heading" for="contractEndDate">Contract End Date </label>
-        <input formControlName="contractEndDate" id="contractEndDate" type="text" class="form-control" placeholder="Contract End Date"
-            [ngClass]="{'has-error': contractEndDate.touched && contractEndDate.invalid}">
-        <div *ngIf="contractEndDate.touched && contractEndDate.invalid" class="display-error">
-          <div *ngIf="contractEndDate.errors.required">Contract End Date is required</div>
-        </div>
-      </div> -->
+      </div>
       <div class="form-group required">
         <label class="control-label field-heading" for="contractType">Contract Type</label>
         <select formControlName="contractType" id="contractType" class="form-control" (ngModelChange)="selectedContractType($event)" [(ngModel)]="contractSel" [disableControl]="disable"
@@ -95,10 +76,10 @@
           </ng-template>
         </div><br>
       <div class="form-group">
-        <div class="row">
-          <button type="button" class= "btn btn-danger btn-md backButton" Goback >BACK</button>      
-          <button type="submit" class="btn btn-info btn-md submitButton" [disabled]="!customerForm.valid">SAVE</button>
-          <button type="button" class= "btn btn-md resetButton" (click)="reset()">RESET</button>
+        <div class="row justify-content-center align-items-center col-sm-12">
+          <button type="button" class="col-sm-3 btn btn-danger btn-md backButton" Goback><span class="fa fa-hand-o-left"></span>&nbsp;BACK</button>      
+          <button type="submit" class="col-sm-3 btn btn-info btn-md submitButton" [disabled]="!customerForm.valid"><span class="fa fa-save"></span>&nbsp;SAVE</button>
+          <button type="button" class="col-sm-3 btn btn-md resetButton" (click)="reset()"><span class="fa fa-undo"></span>&nbsp;RESET</button>
         </div>
       </div>
     </form>

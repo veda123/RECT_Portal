@@ -112,7 +112,6 @@ export class LocationCapabilityComponent implements OnInit {
           if(data.equipment != null)
           {
             data = data.equipment.equipmentname + '",' + '"' + data.lrupartnumber + '",' + '"' + data.lrudescription;
-            // data = value +  '",' + '"' + data.lrupartnumber;
           }
           if(data.locationID != null)
             data = data.locationName;      
